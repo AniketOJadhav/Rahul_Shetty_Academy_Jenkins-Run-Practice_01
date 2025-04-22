@@ -70,10 +70,18 @@ public class ObjectRepo {
     }
 
     public static void startTestAndLog_1_SS(String testNumber, String testDescription) {
+
         if (extent == null) initializeReport();
         test = extent.createTest(testNumber, testDescription);
 
         initializeDriverIfNeeded();
+
+    	if (extent != null) {
+    	    test = extent.createTest(testNumber, testDescription);
+    	} else {
+    	    System.err.println("ExtentReports is still null after initialization.");
+    	}
+
 
         try {
             String encodedScreenshot = takeScreenshot();
@@ -88,6 +96,7 @@ public class ObjectRepo {
             test.fail("Error while capturing screenshot: " + e.getMessage());
         }
     }
+
 
     public static void startTestAndLog_2(String testNumber, String testDescription) {
         if (extent == null) initializeReport();
@@ -120,7 +129,11 @@ public class ObjectRepo {
                         System.out.println("Error Message Print: " + errorText);
                         System.out.println("Test Case Number: " + testNumber_Print_Massage);
                         test.pass("  Error Message: " + errorText);
+
                         logTestWithScreenshot("Error captured for " + testNumber_Print_Massage);
+
+                        logTestWithScreenshot("Error Massage captured for " + testNumber_Print_Massage);
+
                     }
                 }
             } else {
@@ -181,12 +194,18 @@ public class ObjectRepo {
         }
         System.out.println("Extent Report flushed successfully...");
 
+/*
+>>>>>>> 5197290 (Initial commit: Added Rahul Shetty Jenkins run project)
         try {
             String reportPath = System.getProperty("user.dir") + "/test-output/Extent_Reports/TestReport.html";
             Demo_Mail.sendReportEmail(reportPath);  // Make sure Demo_Mail handles this
         } catch (Exception e) {
             System.out.println("Failed to send email: " + e.getMessage());
         }
+<<<<<<< HEAD
+=======
+        */
+
     }
 
     @AfterClass

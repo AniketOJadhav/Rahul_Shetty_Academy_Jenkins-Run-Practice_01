@@ -42,7 +42,11 @@ public class RSA_Base_Class_Practice_Projects {
     	System.setProperty("webdriver.chrome.driver", "C:\\Jenkins_Projects\\Rahul_Shetty_Academy_Jenkins_Run_Project\\Driver_New_Version");
         // Initialize the WebDriver for Chrome browser
         driver = new ChromeDriver();
+
         driver.get("https://rahulshettyacademy.com/practice-project");
+
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
