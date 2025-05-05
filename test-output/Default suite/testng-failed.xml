@@ -3,25 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="Com.Login_Test.LoginPage_Test">
+      <class name="Com_Utility.RSA_Base_Class_Practice_Projects">
         <methods>
-          <include name="close"/>
-          <include name="afterSuite"/>
-          <include name="openbrowser"/>
           <include name="Data_Provider"/>
-          <include name="LoginRSA"/>
+          <include name="close"/>
+          <include name="openbrowser"/>
+          <include name="openbrowser"/>
+          <include name="afterSuite"/>
         </methods>
-      </class> <!-- Com.Login_Test.LoginPage_Test -->
-=======
-      <class name="Com.Login_Test.Login_Register_Test">
-        <methods>
-          <include name="Register_Page"/>
-          <include name="setup"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- Com.Login_Test.Login_Register_Test -->
->>>>>>> 5197290 (Initial commit: Added Rahul Shetty Jenkins run project)
+      </class> <!-- Com_Utility.RSA_Base_Class_Practice_Projects -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

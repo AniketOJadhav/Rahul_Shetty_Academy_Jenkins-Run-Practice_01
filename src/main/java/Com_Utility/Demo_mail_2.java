@@ -14,7 +14,7 @@ public class Demo_mail_2 {
         System.out.println("=================== TEST Started ==============");
 
         // Path to your Extent Report
-        String reportPath = "C:/Users/10389/eclipse-workspace/FOSROC_Automation/test-output/Extent_Reports/TestReport.html";
+        String reportPath = "/Rahul_Shetty_Academy_Jenkins_Run_Project/test-output/Extent_Reports/TestReport.html";
 
         //  Create the attachment
         EmailAttachment attachment = new EmailAttachment();
@@ -35,7 +35,7 @@ public class Demo_mail_2 {
         email.setSubject("Automation Test Execution Report");
         email.setMsg("Hello Team,"
         		+ "\n\nPlease find the attached Automation Test Execution Extent Report.\n\nRegards,\nAniket Jadhav");
-        email.addTo("aniket.jadhav@heerasoftware.com"); // Receiver
+        email.addTo("jadhavaniket1572@gmail.com"); // Receiver
 
 //        // Attach the Extent Report
      email.attach(attachment);

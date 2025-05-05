@@ -8,10 +8,8 @@ public class SQL {
 
         // Data We Want To Validate from the Grid List
         String[][] gridData = {
-            {"Rajesh", "22-10-2024", "Karnataka", "Bangalore", "9986434699", "BAJPC4350M", "Active"},
-            {"Subhash", "24-10-2024", "Karnataka", "Bangalore", "7619611155", "BAJPC4350M", "Active"},
-            {"Harish Babu", "12-11-2024", "Karnataka", "Bangalore", "7842262485", "BTKPM4221K", "Active"},
-            {"Dummy FSG", "14-11-2024", "Karnataka", "Bangalore", "7842265314", "BTKPM5332L", "Inactive"}
+            {"we can add string data which want to fetch"},
+            
         };
 
         // Database connection variables

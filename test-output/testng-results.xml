@@ -2,53 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-<<<<<<< HEAD
-  <suite started-at="2025-04-14T01:38:21 IST" name="Default suite" finished-at="2025-04-14T01:38:32 IST" duration-ms="11559">
+  <suite started-at="2025-05-05T20:41:30 IST" name="Default suite" finished-at="2025-05-05T20:41:57 IST" duration-ms="26455">
     <groups>
     </groups>
-    <test started-at="2025-04-14T01:38:21 IST" name="Default test" finished-at="2025-04-14T01:38:32 IST" duration-ms="11559">
-      <class name="Com.Login_Test.LoginPage_Test">
-        <test-method is-config="true" signature="Data_Provider()[pri:0, instance:Com.Login_Test.LoginPage_Test@13e344d]" started-at="2025-04-14T01:38:18 IST" name="Data_Provider" finished-at="2025-04-14T01:38:21 IST" duration-ms="2494" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Data_Provider -->
-        <test-method is-config="true" signature="openbrowser()[pri:0, instance:Com.Login_Test.LoginPage_Test@13e344d]" started-at="2025-04-14T01:38:21 IST" name="openbrowser" finished-at="2025-04-14T01:38:32 IST" duration-ms="11013" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openbrowser -->
-        <test-method signature="LoginRSA()[pri:0, instance:Com.Login_Test.LoginPage_Test@13e344d]" started-at="2025-04-14T01:38:32 IST" name="LoginRSA" finished-at="2025-04-14T01:38:32 IST" duration-ms="49" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- LoginRSA -->
-        <test-method is-config="true" signature="close()[pri:0, instance:Com.Login_Test.LoginPage_Test@13e344d]" started-at="2025-04-14T01:38:32 IST" name="close" finished-at="2025-04-14T01:38:32 IST" duration-ms="428" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- close -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:Com.Login_Test.LoginPage_Test@13e344d]" started-at="2025-04-14T01:38:32 IST" name="afterSuite" finished-at="2025-04-14T01:38:38 IST" duration-ms="5634" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterSuite -->
-      </class> <!-- Com.Login_Test.LoginPage_Test -->
-=======
-  <suite started-at="2025-04-23T00:34:17 IST" name="Default suite" finished-at="2025-04-23T00:34:37 IST" duration-ms="20202">
-    <groups>
-    </groups>
-    <test started-at="2025-04-23T00:34:17 IST" name="Default test" finished-at="2025-04-23T00:34:37 IST" duration-ms="20202">
+    <test started-at="2025-05-05T20:41:30 IST" name="Default test" finished-at="2025-05-05T20:41:57 IST" duration-ms="26455">
       <class name="Com.Login_Test.Login_Register_Test">
-        <test-method is-config="true" signature="setup()[pri:0, instance:Com.Login_Test.Login_Register_Test@26e356f0]" started-at="2025-04-23T00:34:17 IST" name="setup" finished-at="2025-04-23T00:34:21 IST" duration-ms="4393" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:Com.Login_Test.Login_Register_Test@26e356f0]" started-at="2025-05-05T20:41:30 IST" name="setup" finished-at="2025-05-05T20:41:37 IST" duration-ms="7189" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="Register_Page()[pri:0, instance:Com.Login_Test.Login_Register_Test@26e356f0]" started-at="2025-04-23T00:34:21 IST" name="Register_Page" finished-at="2025-04-23T00:34:36 IST" duration-ms="14826" status="PASS">
+        <test-method signature="Register_Page()[pri:0, instance:Com.Login_Test.Login_Register_Test@26e356f0]" started-at="2025-05-05T20:41:37 IST" name="Register_Page" finished-at="2025-05-05T20:41:55 IST" duration-ms="17563" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Register_Page -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:Com.Login_Test.Login_Register_Test@26e356f0]" started-at="2025-04-23T00:34:36 IST" name="tearDown" finished-at="2025-04-23T00:34:37 IST" duration-ms="923" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:Com.Login_Test.Login_Register_Test@26e356f0]" started-at="2025-05-05T20:41:55 IST" name="tearDown" finished-at="2025-05-05T20:41:57 IST" duration-ms="1636" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- Com.Login_Test.Login_Register_Test -->
->>>>>>> 5197290 (Initial commit: Added Rahul Shetty Jenkins run project)
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
