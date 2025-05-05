@@ -1,3 +1,19 @@
-*.html linguist-detectable=false
-test-output/** linguist-vendored
+# Mark Java as important
 *.java linguist-detectable=true
+
+# Ignore HTML reports and other non-source files
+*.html linguist-detectable=false
+*.xml linguist-detectable=false
+*.json linguist-detectable=false
+*.csv linguist-detectable=false
+
+# Mark folders as vendored (ignored from language stats)
+test-output/** linguist-vendored
+target/** linguist-vendored
+.settings/** linguist-vendored
+Excel_TestData/** linguist-vendored
+Config_TestData/** linguist-vendored
+Driver_New_Version/** linguist-vendored
+
+# Optional: ignore other non-code folders
+.mvn/** linguist-vendored
