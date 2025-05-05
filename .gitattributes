@@ -1,0 +1,3 @@
+*.html linguist-detectable=false
+test-output/** linguist-vendored
+*.java linguist-detectable=true
