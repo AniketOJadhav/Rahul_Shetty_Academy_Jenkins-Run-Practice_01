@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
 import Com.Login_Main.LoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -35,7 +36,7 @@ public class RSA_Base_Class_Practice_Projects {
     // BeforeMethod to open the browser and run the login process
     @BeforeMethod
     
-   
+   @Test
     public void openbrowser() throws Exception {
      // Automatically download and set up the ChromeDriver using WebDriverManager
      WebDriverManager.chromedriver().setup();
@@ -43,9 +44,9 @@ public class RSA_Base_Class_Practice_Projects {
         // Initialize the WebDriver for Chrome browser
         driver = new ChromeDriver();
 
-        driver.get("https://rahulshettyacademy.com/practice-project");
+        driver.get("https://rahulshettyacademy.com/client");
 
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+      //  driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
