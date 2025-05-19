@@ -60,29 +60,18 @@ public class ObjectRepo {
     }
 
     public static void startTest(String testName, String testDescription) {
-        if (extent == null) initializeReport();
         test = extent.createTest(testName, testDescription);
     }
 
+    
+    
     public static void startTestAndLog_1(String testNumber, String testDescription) {
-        if (extent == null) initializeReport();
         test = extent.createTest(testNumber, testDescription);
     }
 
+    /*
     public static void startTestAndLog_1_SS(String testNumber, String testDescription) {
-
-        if (extent == null) initializeReport();
         test = extent.createTest(testNumber, testDescription);
-
-        initializeDriverIfNeeded();
-
-    	if (extent != null) {
-    	    test = extent.createTest(testNumber, testDescription);
-    	} else {
-    	    System.err.println("ExtentReports is still null after initialization.");
-    	}
-
-
         try {
             String encodedScreenshot = takeScreenshot();
             if (encodedScreenshot != null && !encodedScreenshot.isEmpty()) {
@@ -96,55 +85,70 @@ public class ObjectRepo {
             test.fail("Error while capturing screenshot: " + e.getMessage());
         }
     }
+    */
+    
+    
+    public static void startTestAndLog_1_SS(String testNumber, String testDescription, Runnable action) {
+        // Start the test
+        test = extent.createTest(testNumber, testDescription);
 
+        try {
+            // Perform the test action
+            action.run();
+
+            // Capture screenshot after successful execution
+            String encodedScreenshot = takeScreenshot();
+            test.pass(testDescription + " - Step Passed");
+
+            if (encodedScreenshot != null && !encodedScreenshot.isEmpty()) {
+                test.addScreenCaptureFromBase64String(encodedScreenshot, "Screenshot - Passed");
+            } else {
+                test.warning("Screenshot could not be captured.");
+            }
+
+        } catch (Exception e) {
+            // Capture screenshot on failure
+            String encodedScreenshot = null;
+            try {
+                encodedScreenshot = takeScreenshot();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            test.fail(testDescription + " - Step Failed: " + e.getMessage());
+            if (encodedScreenshot != null && !encodedScreenshot.isEmpty()) {
+                test.addScreenCaptureFromBase64String(encodedScreenshot, "Screenshot - Failed");
+            }
+
+            throw new RuntimeException(e); // Rethrow to fail the test
+        }
+    }
+    
+    
+    
 
     public static void startTestAndLog_2(String testNumber, String testDescription) {
-        if (extent == null) initializeReport();
         test = extent.createTest(testNumber, testDescription);
         test.log(Status.INFO, testDescription);
+        
     }
 
+    
+    
     public static void AssertTextAndLog(String actualText, String expectedText) throws Exception {
         try {
             Assert.assertEquals(actualText, expectedText);
-            test.log(Status.PASS, " | Expected: " + expectedText + " | Actual: " + actualText);
+            test.log(Status.PASS, "| Expected: " + expectedText + " | Actual: " + actualText);
         } catch (AssertionError e) {
             test.fail(" | Expected: " + expectedText + " | Actual: " + actualText);
             String screenshotPath = takeScreenshot();
-            test.addScreenCaptureFromBase64String(screenshotPath);
+            test.addScreenCaptureFromPath(screenshotPath);
             throw e;
         }
+        
     }
-
-    public static void Print_Dynamic_Error_Massage(WebDriver driver, String xpathLocator, String testNumber_Print_Massage) {
-        try {
-            if (extent == null) initializeReport();
-            test = extent.createTest(testNumber_Print_Massage);
-            List<WebElement> errorMessageList = driver.findElements(By.xpath(xpathLocator));
-
-            if (!errorMessageList.isEmpty()) {
-                for (WebElement errorMessage : errorMessageList) {
-                    if (errorMessage.isDisplayed()) {
-                        String errorText = errorMessage.getText();
-                        System.out.println("Error Message Print: " + errorText);
-                        System.out.println("Test Case Number: " + testNumber_Print_Massage);
-                        test.pass("  Error Message: " + errorText);
-
-                        logTestWithScreenshot("Error captured for " + testNumber_Print_Massage);
-
-                        logTestWithScreenshot("Error Massage captured for " + testNumber_Print_Massage);
-
-                    }
-                }
-            } else {
-                System.out.println("No error message displayed.");
-            }
-        } catch (Exception e) {
-            System.err.println("An unexpected error occurred: " + e.getMessage());
-            e.printStackTrace();
-            test.fail("An unexpected error occurred: " + e.getMessage());
-        }
-    }
+    
+    
 
     public static void logTestResult(String testName, String testDescription, boolean isTestPassed, String additionalInfo) {
         startTest(testName, testDescription);
@@ -155,10 +159,48 @@ public class ObjectRepo {
         }
     }
 
+    public static void Print_Dynamic_Error_Massage(WebDriver driver, String xpathLocator, String testNumber_Print_Massage) {
+    	
+        try {
+        	
+            test = extent.createTest(testNumber_Print_Massage);
+            List<WebElement> errorMessageList = driver.findElements(By.xpath(xpathLocator));
+            if (!errorMessageList.isEmpty()) {
+                for (WebElement errorMessage : errorMessageList) {
+                    if (errorMessage.isDisplayed()) {
+                        String errorText = errorMessage.getText();
+                        System.out.println("Error Message Print: " + errorText);
+                        System.out.println("Test Case Number: " + testNumber_Print_Massage);
+                        test.pass("  Error Massage: " + errorText);
+                        logTestWithScreenshot("Error captured for  " + testNumber_Print_Massage);
+                    }
+                }
+            } else {
+                System.out.println("No error message displayed.");
+            }
+        } catch (Exception e) {
+            System.err.println("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
+            test.fail("An unexpected error occurred: " + e.getMessage());
+        }
+        
+    }
+    
+    
+
     public static String takeScreenshot() throws IOException {
-        initializeDriverIfNeeded();
+        // Ensure the WebDriver is initialized
+        if (driver == null) {
+            throw new IllegalStateException("Driver is not initialized.");
+        }
+
+        // Take screenshot and store it in a temporary file
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+        // Convert the screenshot file to a byte array
         byte[] fileContent = FileUtils.readFileToByteArray(srcFile);
+
+        // Convert the byte array to a Base64 encoded string
         return Base64.getEncoder().encodeToString(fileContent);
     }
 
@@ -166,25 +208,14 @@ public class ObjectRepo {
         try {
             String encodedScreenshot = takeScreenshot();
             if (encodedScreenshot != null && !encodedScreenshot.isEmpty()) {
-                test.info(logMessage + " ==> Screenshot Captured");
+                test.info(logMessage + " ==>Screenshot Captured");
                 test.addScreenCaptureFromBase64String(encodedScreenshot);
             } else {
                 test.fail("Screenshot could not be captured.");
             }
-
         } catch (IOException e) {
             e.printStackTrace();
             test.fail("Error while capturing screenshot: " + e.getMessage());
-        }
-    }
-
-    public static String captureScreenshotBase64() {
-        try {
-            TakesScreenshot ts = (TakesScreenshot) driver;
-            return ts.getScreenshotAs(OutputType.BASE64);
-        } catch (Exception e) {
-            System.out.println("Screenshot capture failed: " + e.getMessage());
-            return "";
         }
     }
 
@@ -192,20 +223,21 @@ public class ObjectRepo {
         if (extent != null) {
             extent.flush();
         }
-        System.out.println("Extent Report flushed successfully...");
+        System.out.println("✅ Extent Report flushed successfully...");
 
-/*
->>>>>>> 5197290 (Initial commit: Added Rahul Shetty Jenkins run project)
         try {
             String reportPath = System.getProperty("user.dir") + "/test-output/Extent_Reports/TestReport.html";
-            Demo_Mail.sendReportEmail(reportPath);  // Make sure Demo_Mail handles this
+            File reportFile = new File(reportPath);
+            if (!reportFile.exists()) {
+                System.out.println("❌ Report file not found at: " + reportPath);
+                return;
+            }
+            Thread.sleep(5000);
+            Demo_Mail.sendReportEmail();
         } catch (Exception e) {
-            System.out.println("Failed to send email: " + e.getMessage());
+            System.out.println("❌ Failed to send email: " + e.getMessage());
+            e.printStackTrace();
         }
-<<<<<<< HEAD
-=======
-        */
-
     }
 
     @AfterClass
@@ -213,8 +245,7 @@ public class ObjectRepo {
         finalizeReport();
     }
 
-	public static ExtentReports extentreport() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-}
+    public static ExtentReports extentreport() {
+        return null;
+    }
+} 
