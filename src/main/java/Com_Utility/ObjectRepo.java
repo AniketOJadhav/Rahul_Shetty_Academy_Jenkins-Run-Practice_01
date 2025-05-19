@@ -85,8 +85,6 @@ public class ObjectRepo {
             test.fail("Error while capturing screenshot: " + e.getMessage());
         }
     }
-    */
-    
     
     public static void startTestAndLog_1_SS(String testNumber, String testDescription, Runnable action) {
         // Start the test
@@ -123,7 +121,52 @@ public class ObjectRepo {
             throw new RuntimeException(e); // Rethrow to fail the test
         }
     }
-    
+    */
+//When Driver Not Initialised Problem Occours..only capture a screenshot if driver is initialized method Refurbished thats why i put name same-->
+     public static void startTestAndLog_1_SS(String testNumber, String testDescription, Runnable action) {
+        // Start the test
+        test = extent.createTest(testNumber, testDescription);
+
+        try {
+            // Perform the test action
+            action.run();
+            test.pass(testDescription + " - Step Passed");
+
+            // Capture screenshot only if driver is initialized
+            if (driver != null) {
+                String encodedScreenshot = takeScreenshot();
+                if (encodedScreenshot != null && !encodedScreenshot.isEmpty()) {
+                    test.addScreenCaptureFromBase64String(encodedScreenshot, "Screenshot - Passed");
+                } else {
+                    test.warning("Screenshot could not be captured.");
+                }
+            } else {
+                test.info("Driver not initialized — screenshot skipped.");
+            }
+
+        } catch (Exception e) {
+            test.fail(testDescription + " - Step Failed: " + e.getMessage());
+
+            // Capture screenshot only if driver is initialized
+            if (driver != null) {
+                try {
+                    String encodedScreenshot = takeScreenshot();
+                    if (encodedScreenshot != null && !encodedScreenshot.isEmpty()) {
+                        test.addScreenCaptureFromBase64String(encodedScreenshot, "Screenshot - Failed");
+                    } else {
+                        test.warning("Screenshot could not be captured on failure.");
+                    }
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                    test.warning("Screenshot capture failed with IOException.");
+                }
+            } else {
+                test.info("Driver not initialized — failure screenshot skipped.");
+            }
+
+            throw new RuntimeException(e); // Rethrow to fail the test
+        }
+    }
     
     
 
