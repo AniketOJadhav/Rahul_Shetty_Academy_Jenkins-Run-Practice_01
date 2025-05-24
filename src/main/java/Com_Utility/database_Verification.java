@@ -22,7 +22,7 @@ public class New_Distributor_Database_Conn {
     ResultSet rs;
 
     // Expected values
-    String expectedName = "Pratik Thakur Enterprises and sons";
+    String expectedName = "Enterprises and sons";
     String expectedCode = "10041";
     String expectedId = "31";
     String expectedBeat = "Koregaon Park";
@@ -40,9 +40,9 @@ public class New_Distributor_Database_Conn {
 
     @BeforeClass
     public void setUp() throws Exception {
-        String jdbcURL = "jdbc:sqlserver://172.25.0.74:1433;databaseName=Fosroc_UAT;encrypt=true;trustServerCertificate=true;loginTimeout=10";
-        String username = "Test_Team";
-        String password = "Pass@2025";
+        String jdbcURL = "jdbc:sqlserver query";
+        String username = "Test_Automation";
+        String password = "Pass@2025@";
 
         // Load the JDBC driver
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
